@@ -1429,14 +1429,14 @@ export default function App() {
   ];
   const distancias = [];
 
-  const [varl, setl] = useState("");
-  const [varlu, setlu] = useState("");
-  const [vart, sett] = useState("");
-  const [vard, setd] = useState("");
-  const [vars, sets] = useState("");
-  const [varb, setb] = useState("");
-  const [varnv, setnv] = useState("");
-  const [varn, setn] = useState("");
+  const [varl, setl] = useState();
+  const [varlu, setlu] = useState();
+  const [vart, sett] = useState();
+  const [vard, setd] = useState();
+  const [vars, sets] = useState();
+  const [varb, setb] = useState();
+  const [varnv, setnv] = useState();
+  const [varn, setn] = useState();
   const [m1, setm1] = useState();
   const [m2, setm2] = useState();
   const [classeR1, setClasseR1] = useState();
@@ -1460,6 +1460,10 @@ export default function App() {
     classeR2,
     classeL2,
   };
+
+  function handleChangeInput(event) {
+    setl(event.target.value);
+  }
 
   const handleCalculate = () => {
     let n1 = (4.5 * data.varnv) / data.varlu;
@@ -1620,6 +1624,8 @@ export default function App() {
     setClasseL1(classeL1_temp);
     setClasseR2(classeR2_temp);
     setClasseL2(classeL2_temp);
+
+    console.log(data.varl);
   };
 
   return (
@@ -1633,11 +1639,20 @@ export default function App() {
           width: "100%",
         }}
       >
-        <View style={{ width: 240, justifyContent: "flex-start" }}>
+        <View style={{ flex: 0.78, justifyContent: "flex-start" }}>
           <Text style={styles.text_ind}>Comprimento do vão (L, m)</Text>
         </View>
-        <View style={{ width: 50, justifyContent: "flex-end" }}>
-          <TextInput style={styles.input} onChangeText={setl} value={varl} />
+        <View style={{ flex: 0.16, justifyContent: "flex-end" }}>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            returnKeyType="done"
+            onChangeText={(entryValue) =>{
+              let newEntryValue = entryValue.replace(',', '.');
+              setl(newEntryValue);
+            }}
+            value={varl}
+          />
         </View>
       </View>
       <View
@@ -1647,13 +1662,22 @@ export default function App() {
           width: "100%",
         }}
       >
-        <View style={{ width: 240, justifyContent: "flex-start" }}>
+        <View style={{ flex: 0.78, justifyContent: "flex-start" }}>
           <Text style={styles.text_ind}>
             Largura da pista entre rodapés (Lu, m)
           </Text>
         </View>
-        <View style={{ width: 50, justifyContent: "flex-end" }}>
-          <TextInput style={styles.input} onChangeText={setlu} value={varlu} />
+        <View style={{ flex: 0.16, justifyContent: "flex-end" }}>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            returnKeyType="done"
+            onChangeText={(entryValue) =>{
+              let newEntryValue = entryValue.replace(',', '.');
+              setlu(newEntryValue);
+            }}
+            value={varlu}
+          />
         </View>
       </View>
       <View
@@ -1663,11 +1687,20 @@ export default function App() {
           width: "100%",
         }}
       >
-        <View style={{ width: 240, justifyContent: "flex-start" }}>
+        <View style={{ flex: 0.78, justifyContent: "flex-start" }}>
           <Text style={styles.text_ind}>Largura total da laje (T, cm)</Text>
         </View>
-        <View style={{ width: 50, justifyContent: "flex-end" }}>
-          <TextInput style={styles.input} onChangeText={sett} value={vart} />
+        <View style={{ flex: 0.16, justifyContent: "flex-end" }}>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            returnKeyType="done"
+            onChangeText={(entryValue) =>{
+              let newEntryValue = entryValue.replace(',', '.');
+              sett(newEntryValue);
+            }}
+            value={vart}
+          />
         </View>
       </View>
       <View
@@ -1677,13 +1710,22 @@ export default function App() {
           width: "100%",
         }}
       >
-        <View style={{ width: 240, justifyContent: "flex-start" }}>
+        <View style={{ flex: 0.78, justifyContent: "flex-start" }}>
           <Text style={styles.text_ind}>
             Espessura da laje de concreto (d, cm)
           </Text>
         </View>
-        <View style={{ width: 50, justifyContent: "flex-end" }}>
-          <TextInput style={styles.input} onChangeText={setd} value={vard} />
+        <View style={{ flex: 0.16, justifyContent: "flex-end" }}>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            returnKeyType="done"
+            onChangeText={(entryValue) =>{
+              let newEntryValue = entryValue.replace(',', '.');
+              setd(newEntryValue);
+            }}
+            value={vard}
+          />
         </View>
       </View>
       <View
@@ -1693,11 +1735,20 @@ export default function App() {
           width: "100%",
         }}
       >
-        <View style={{ width: 240, justifyContent: "flex-start" }}>
+        <View style={{ flex: 0.78, justifyContent: "flex-start" }}>
           <Text style={styles.text_ind}>Distância entre as vigas (S, cm)</Text>
         </View>
-        <View style={{ width: 50, justifyContent: "flex-end" }}>
-          <TextInput style={styles.input} onChangeText={sets} value={vars} />
+        <View style={{ flex: 0.16, justifyContent: "flex-end" }}>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            returnKeyType="done"
+            onChangeText={(entryValue) =>{
+              let newEntryValue = entryValue.replace(',', '.');
+              sets(newEntryValue);
+            }}
+            value={vars}
+          />
         </View>
       </View>
       <View
@@ -1707,11 +1758,20 @@ export default function App() {
           width: "100%",
         }}
       >
-        <View style={{ width: 240, justifyContent: "flex-start" }}>
+        <View style={{ flex: 0.78, justifyContent: "flex-start" }}>
           <Text style={styles.text_ind}>Espessura da viga (b, cm)</Text>
         </View>
-        <View style={{ width: 50, justifyContent: "flex-end" }}>
-          <TextInput style={styles.input} onChangeText={setb} value={varb} />
+        <View style={{ flex: 0.16, justifyContent: "flex-end" }}>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            returnKeyType="done"
+            onChangeText={(entryValue) =>{
+              let newEntryValue = entryValue.replace(',', '.');
+              setb(newEntryValue);
+            }}
+            value={varb}
+          />
         </View>
       </View>
       <View
@@ -1721,11 +1781,20 @@ export default function App() {
           width: "100%",
         }}
       >
-        <View style={{ width: 240, justifyContent: "flex-start" }}>
+        <View style={{ flex: 0.78, justifyContent: "flex-start" }}>
           <Text style={styles.text_ind}>Número total de vigas (Nv)</Text>
         </View>
-        <View style={{ width: 50, justifyContent: "flex-end" }}>
-          <TextInput style={styles.input} onChangeText={setnv} value={varnv} />
+        <View style={{ flex: 0.16, justifyContent: "flex-end" }}>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            returnKeyType="done"
+            onChangeText={(entryValue) =>{
+              let newEntryValue = entryValue.replace(',', '.');
+              setnv(newEntryValue);
+            }}
+            value={varnv}
+          />
         </View>
       </View>
       <View
@@ -1735,11 +1804,21 @@ export default function App() {
           width: "100%",
         }}
       >
-        <View style={{ width: 240, justifyContent: "flex-start" }}>
+        <View style={{ flex: 0.78, justifyContent: "flex-start" }}>
           <Text style={styles.text_ind}>Número total de vias (N)</Text>
         </View>
-        <View style={{ width: 50, justifyContent: "flex-end" }}>
-          <TextInput style={styles.input} onChangeText={setn} value={varn} />
+        <View style={{ flex: 0.16, justifyContent: "flex-end" }}>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            returnKeyType="done"
+            onChangeText={(entryValue) =>{
+              let newEntryValue = entryValue.replace(/[^1-2]/g, '');
+              setn(newEntryValue);
+            }}
+            value={varn}
+            maxLength={1}
+          />
         </View>
       </View>
 
@@ -1750,11 +1829,15 @@ export default function App() {
       <View style={styles.container_answer}>
         <Text style={styles.above_answer}>CLASSES</Text>
         <View style={styles.answer}>
-          {typeof(classeR1) == 'number' && typeof(classeL1) == 'number' && data.varn == 1? (
+          {typeof classeR1 == "number" &&
+          typeof classeL1 == "number" &&
+          data.varn == 1 ? (
             <Text>
               {classeR1}R | {classeL1}L
             </Text>
-          ) : typeof(classeR2) == 'number' && typeof(classeL2) == 'number' && data.varn == 2? (
+          ) : typeof classeR2 == "number" &&
+            typeof classeL2 == "number" &&
+            data.varn == 2 ? (
             <Text>
               {classeR2}R | {classeL2}L
             </Text>
