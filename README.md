@@ -3,6 +3,7 @@
 Aplicativo desenvolvido em React Native para automatizar o processo de classificação de pontes militares.
 
 Primeiro, instale Node.js. Isso pode ser feito pelo seguinte link: https://nodejs.org/en/download/ (recomendo, para o Windows, baixar o Windows Installer (.msi)).
+
 Em seguida, baixe ou copie os arquivos deste projeto em um ambiente de desenvolvimento (VSCode, por exemplo: https://code.visualstudio.com/download).
 
 Digite "npm start" no terminal (no terminal do VSCode, por exemplo).
