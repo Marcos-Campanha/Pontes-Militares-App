@@ -9,8 +9,11 @@ Em seguida, baixe ou copie os arquivos deste projeto em um ambiente de desenvolv
 Instale, também, o aplicativo "Expo Go", na App Store (usuários de iOS) ou na Play Store (usuários de Android).
 
 No terminal (do VSCode, por exemplo), instale as dependências. Para tanto, digite os seguintes comandos:
+
 *npm install -g expo-cli*
+
 *npm audit fix*
+
 *npm start*
 
 Aparecerá um QRCode. Capture-o com a câmera do celular e, então, utilize o programa de classificação de pontes militares.
