@@ -48,11 +48,15 @@ export default function App() {
   useEffect(() => {
     calcularClasses();
     setButtonPressed(false);
+    console.log(data);
   }, [buttonPressed])
 
   const calcularClasses = () => {
     for (const dado in data) {
-      if (typeof data[dado] === 'undefined' && dado !== 'm1' && dado !== 'm2') {
+      if ((data["varn"] !== "1" && data["varn"] !== "2")) {
+        return;
+      }
+      else if ((typeof data[dado] === 'undefined' && dado !== 'm1' && dado !== 'm2')) {
         return;
       }
     }
@@ -173,48 +177,57 @@ export default function App() {
       expected_momentum_rodas.push(expected_momentum_temp);
     }
 
-    const nearest_momentum_m1_lagartas = expected_momentum_lagartas.reduce(
-      (prev, curr) =>
-        Math.abs(curr - data.m1) < Math.abs(prev - data.m1) ? curr : prev
-    );
-    const nearest_momentum_m2_lagartas = expected_momentum_lagartas.reduce(
-      (prev, curr) =>
-        Math.abs(curr - data.m2) < Math.abs(prev - data.m2) ? curr : prev
-    );
-    const nearest_momentum_m1_rodas = expected_momentum_rodas.reduce(
-      (prev, curr) =>
-        Math.abs(curr - data.m1) < Math.abs(prev - data.m1) ? curr : prev
-    );
-    const nearest_momentum_m2_rodas = expected_momentum_rodas.reduce(
-      (prev, curr) =>
-        Math.abs(curr - data.m2) < Math.abs(prev - data.m2) ? curr : prev
-    );
+    // Cálculo das classes para n = 1 (uma via)
+    if (data["varn"] === "1") {
+      const nearest_momentum_m1_lagartas = expected_momentum_lagartas.reduce(
+        (prev, curr) =>
+          Math.abs(curr - data.m1) < Math.abs(prev - data.m1) ? curr : prev
+      );
+      const nearest_momentum_m1_rodas = expected_momentum_rodas.reduce(
+        (prev, curr) =>
+          Math.abs(curr - data.m1) < Math.abs(prev - data.m1) ? curr : prev
+      );
 
-    let nearest_momentum_m1_lagartas_index, nearest_momentum_m2_lagartas_index;
-    let nearest_momentum_m1_rodas_index, nearest_momentum_m2_rodas_index;
+      let nearest_momentum_m1_lagartas_index;
+      let nearest_momentum_m1_rodas_index;
 
-    nearest_momentum_m1_lagartas_index = expected_momentum_lagartas.indexOf(
-      nearest_momentum_m1_lagartas
-    );
-    nearest_momentum_m2_lagartas_index = expected_momentum_lagartas.indexOf(
-      nearest_momentum_m2_lagartas
-    );
-    nearest_momentum_m1_rodas_index = expected_momentum_rodas.indexOf(
-      nearest_momentum_m1_rodas
-    );
-    nearest_momentum_m2_rodas_index = expected_momentum_rodas.indexOf(
-      nearest_momentum_m2_rodas
-    );
+      nearest_momentum_m1_lagartas_index = expected_momentum_lagartas.indexOf(
+        nearest_momentum_m1_lagartas
+      );
+      nearest_momentum_m1_rodas_index = expected_momentum_rodas.indexOf(
+        nearest_momentum_m1_rodas
+      );
 
-    let classeL1_temp = classes[nearest_momentum_m1_lagartas_index];
-    let classeR1_temp = classes[nearest_momentum_m1_rodas_index];
-    let classeL2_temp = classes[nearest_momentum_m2_lagartas_index];
-    let classeR2_temp = classes[nearest_momentum_m2_rodas_index];
+      let classeL1_temp = classes[nearest_momentum_m1_lagartas_index];
+      let classeR1_temp = classes[nearest_momentum_m1_rodas_index];
+      setClasseR1(classeR1_temp);
+      setClasseL1(classeL1_temp);
+    } // Cálculo das classes para n = 2 (duas vias) 
+    else if (data["varn"] === "2") {
+      const nearest_momentum_m2_lagartas = expected_momentum_lagartas.reduce(
+        (prev, curr) =>
+          Math.abs(curr - data.m2) < Math.abs(prev - data.m2) ? curr : prev
+      );
+      const nearest_momentum_m2_rodas = expected_momentum_rodas.reduce(
+        (prev, curr) =>
+          Math.abs(curr - data.m2) < Math.abs(prev - data.m2) ? curr : prev
+      );
+  
+      let nearest_momentum_m2_lagartas_index;
+      let nearest_momentum_m2_rodas_index;
 
-    setClasseR1(classeR1_temp);
-    setClasseL1(classeL1_temp);
-    setClasseR2(classeR2_temp);
-    setClasseL2(classeL2_temp);
+      nearest_momentum_m2_lagartas_index = expected_momentum_lagartas.indexOf(
+        nearest_momentum_m2_lagartas
+      );
+      nearest_momentum_m2_rodas_index = expected_momentum_rodas.indexOf(
+        nearest_momentum_m2_rodas
+      );
+  
+      let classeL2_temp = classes[nearest_momentum_m2_lagartas_index];
+      let classeR2_temp = classes[nearest_momentum_m2_rodas_index];
+      setClasseR2(classeR2_temp);
+      setClasseL2(classeL2_temp);
+    }
   };
 
   return (
@@ -402,6 +415,10 @@ export default function App() {
             keyboardType="numeric"
             returnKeyType="done"
             onChangeText={(entryValue) =>{
+              setClasseL1(null);
+              setClasseL2(null);
+              setClasseR1(null);
+              setClasseR2(null);
               let newEntryValue = entryValue.replace(/[^1-2]/g, '');
               setn(newEntryValue);
             }}

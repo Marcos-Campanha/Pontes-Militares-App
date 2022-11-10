@@ -16,11 +16,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mpdscamp.PontesMilitares"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.mpdscamp.PontesMilitares"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "28e6d080-90e7-4159-a712-38aad4858ba5"
       }
     }
   }
