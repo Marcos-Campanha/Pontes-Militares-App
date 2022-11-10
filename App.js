@@ -48,7 +48,6 @@ export default function App() {
   useEffect(() => {
     calcularClasses();
     setButtonPressed(false);
-    console.log(data);
   }, [buttonPressed])
 
   const calcularClasses = () => {
